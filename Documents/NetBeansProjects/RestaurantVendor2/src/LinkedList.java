@@ -1,3 +1,10 @@
+/**
+ * LinkedList generics
+
+ * @param <T> 
+ */
+
+
 public class LinkedList <T> implements LinkedListInterface <T>{
 
     public LinkedListNode <T> list;
@@ -15,7 +22,6 @@ public class LinkedList <T> implements LinkedListInterface <T>{
 	this.name = name;
 	list = null;
     }
-
 		
     public void add(T element) 
     {
@@ -25,13 +31,51 @@ public class LinkedList <T> implements LinkedListInterface <T>{
 	count++;
     }
 
-		
-    public T remove(T elememt) 
+    public void remove(T element) throws Exception
     {
-	count--;
-	return null;
+	
+        //find if element is in the list by iterating with '=='
+        //if found, remove & reduce count 
+        //else, throw exception
+       
+        //if list is empty, throw exception
+        if(list==null)
+            throw new Exception("cannot remove; empty");
+        
+        //if first node matches, special case (no prev)
+        LinkedListNode<T> iter = this.list; 
+        
+        if(iter.getElement() == element)
+        {
+            list = list.getLink();
+            iter.setLink(null);
+            count--;
+            return;
+        }
+         
+        //other wise
+        LinkedListNode<T> prev = list;
+        iter = iter.getLink(); //iter and prev were pointing at the same node before this
+        
+        while (iter != null) 
+        {
+            iter.getElement();
+            if(iter.getElement() == element)
+            {
+                prev.setLink(iter.getLink());
+                iter.setLink(null);
+                count--;
+                return;
+            }
+            
+            prev = iter;
+            iter = iter.getLink();
+        }
+        
+        //if element is not found
+        throw new Exception("element not found");
+   
     }
-
 
     public T pop() 
     {
@@ -41,26 +85,41 @@ public class LinkedList <T> implements LinkedListInterface <T>{
 	return temp;
     }
 
-
-    public boolean contains(T element) 
+    public T find(String findThis) 
     {
 	LinkedListNode<T> current = list;
-	if (!isEmpty()) 
-	{
-            while (current != null) 
-            {
-		if (current.getElement().equals(element))
-		return true;
-		current = current.getLink();
-            }
-	}
-	return false;
+        while (current != null) 
+        {
+            if (current.getElement().equals(findThis))
+                return current.getElement();
+            
+            current = current.getLink();
+        }
+        return null;
+    }
+    
+
+    public boolean contains(T match_element) 
+    {
+	LinkedListNode<T> current = list;
+	System.out.println("contains");
+        while (current != null) 
+        {
+            System.out.println("contains 0");
+            if (current.getElement().equals(match_element))
+                return true;
+            current = current.getLink();
+        }
+        return false;
     }
 
 		
     public boolean isEmpty() 
     {
-	return list==null;
+	if(list==null)
+            return true;
+        
+        return false;
     }
 
     public String getName() 

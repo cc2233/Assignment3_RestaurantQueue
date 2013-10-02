@@ -1,23 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+import javax.swing.*;
+import java.math.*;
 
-/**
- *
- * @author Scar
+/** SearchGUI is user-friendly interface for vendors to look up food info, add, delete, edit 
+ * 
+ * @author Caroline Chey
  */
 public class SearchGUI extends javax.swing.JFrame {
     
     Driver myDriver;
 
-    /**
-     * Creates new form SearchGUI
+    /** SearchGUI(Driver driver1) passes a Driver to construct
+     * 
+     * @param driver1 
      */
     public SearchGUI(Driver driver1) {
         
         myDriver = driver1;
         initComponents();
+        
     }
 
     /**
@@ -35,10 +35,10 @@ public class SearchGUI extends javax.swing.JFrame {
         listCategory = new java.awt.List();
         listFoodItems = new java.awt.List();
         btnClose = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btnDisplayFoodInfo = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -54,22 +54,42 @@ public class SearchGUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtSpecialOrder = new javax.swing.JTextArea();
         btnSave = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnDeleteFoodItem = new javax.swing.JButton();
+        btnCreateCategory = new javax.swing.JButton();
+        btnDeleteCategory = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.orange);
+        setBounds(new java.awt.Rectangle(1, 1, 1, 1));
+        setForeground(new java.awt.Color(255, 153, 51));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 102, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CATEGORY");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 102, 204));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("FOOD ITEMS");
+
+        listCategory.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listCategoryItemStateChanged(evt);
+            }
+        });
+        listCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listCategoryActionPerformed(evt);
+            }
+        });
 
         btnClose.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnClose.setText("CLOSE");
@@ -79,10 +99,12 @@ public class SearchGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setText("SEARCH");
+        btnSearch.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(153, 102, 255));
+        btnSearch.setText("SEARCH");
 
         btnClear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 102, 0));
         btnClear.setText("CLEAR");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,24 +112,34 @@ public class SearchGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 102, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("FOOD INFO");
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton3.setText("DISPLAY");
+        btnDisplayFoodInfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDisplayFoodInfo.setForeground(new java.awt.Color(255, 102, 204));
+        btnDisplayFoodInfo.setText("DISPLAY FOOD INFO");
+        btnDisplayFoodInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisplayFoodInfoActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 102, 0));
         jLabel5.setText("Name");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 102, 0));
         jLabel6.setText("Price");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 102, 0));
         jLabel7.setText("Qty");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 102, 0));
         jLabel8.setText("Description");
 
         txtDescription.setColumns(20);
@@ -115,9 +147,11 @@ public class SearchGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtDescription);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 102, 0));
         jLabel9.setText("Size");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 102, 0));
         jLabel10.setText("Special Order");
 
         txtSpecialOrder.setColumns(20);
@@ -126,20 +160,33 @@ public class SearchGUI extends javax.swing.JFrame {
 
         btnSave.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnSave.setText("SAVE");
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setText("DELETE");
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton4.setText("CREATE CATEGORY");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton5.setText("DELETE CATEGORY");
+        btnDeleteFoodItem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDeleteFoodItem.setForeground(new java.awt.Color(255, 102, 204));
+        btnDeleteFoodItem.setText("DELETE FOOD ITEM");
+
+        btnCreateCategory.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCreateCategory.setForeground(new java.awt.Color(153, 102, 255));
+        btnCreateCategory.setText("CREATE CATEGORY");
+        btnCreateCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateCategoryActionPerformed(evt);
+            }
+        });
+
+        btnDeleteCategory.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDeleteCategory.setForeground(new java.awt.Color(153, 102, 255));
+        btnDeleteCategory.setText("DELETE CATEGORY");
+        btnDeleteCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCategoryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,19 +195,18 @@ public class SearchGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(listCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnDeleteCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(listCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCreateCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(listFoodItems, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDisplayFoodInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDeleteFoodItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
@@ -180,8 +226,8 @@ public class SearchGUI extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtSize, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSize, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel10)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -193,7 +239,7 @@ public class SearchGUI extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,10 +257,10 @@ public class SearchGUI extends javax.swing.JFrame {
                             .addComponent(listCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3))
+                            .addComponent(btnSearch)
+                            .addComponent(btnDisplayFoodInfo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4))
+                        .addComponent(btnCreateCategory))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -240,50 +286,273 @@ public class SearchGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeleteCategory)
+                    .addComponent(btnDeleteFoodItem))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClear)
                     .addComponent(btnSave)
-                    .addComponent(btnClose)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                    .addComponent(btnClose))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        // closes
-        this.setVisible(false);
-    }//GEN-LAST:event_btnCloseActionPerformed
+    /** showCategories() displays categories in list box
+     * 
+     */
+    public void showCategories() //displays categories
+    {
+        listCategory.removeAll(); //clearing list box first
+        listFoodItems.removeAll(); //clearing food items list box too
+       
+        LinkedListNode<CategoryClass> iter = myDriver.mCategories.list; //adding categories to show in list box
+        while (iter != null) 
+        {
+            listCategory.add(iter.getElement().mCategoryName);
+            iter = iter.getLink();
+            
+        }
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // clears all textfields and textareas
+    }
+    
+    /** showFoodItems() displays food items in list box
+     * 
+     */
+    public void showFoodItems(CategoryClass foodCategory) //displays food items in a category in food items list box
+    {
+        listFoodItems.removeAll(); //clearing list box first
         
+        LinkedListNode<FoodItemClass> iter = foodCategory.mFoodItems.list;
+        while(iter!=null)
+        {
+            listFoodItems.add(iter.getElement().mFoodName);
+            iter = iter.getLink();
+        }
+    }
+    
+    
+    /** showFoodInfo() displays food info in each relative text field
+     * 
+     */
+    public void showFoodInfo(FoodItemClass foodItem1)
+    {
         txtName.setText("");
         txtPrice.setText("");
         txtQty.setText("");
         txtDescription.setText("");
         txtSize.setText("");
         txtSpecialOrder.setText("");
+        
+        txtName.setText(foodItem1.mFoodName);
+        txtPrice.setText(foodItem1.mFoodPrice + "");
+        txtQty.setText(foodItem1.mFoodQty + "");
+        txtDescription.setText(foodItem1.mFoodDescription);
+        txtSpecialOrder.setText(foodItem1.mFoodSpecialOrder);
+    }
+  
+    
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // closes
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    /** clear() clears all text fields that contain food info
+     * 
+     */
+    private void clear()
+    {   
+        txtName.setText("");
+        txtPrice.setText("");
+        txtQty.setText("");
+        txtDescription.setText("");
+        txtSize.setText("");
+        txtSpecialOrder.setText("");
+    
+    }
+        
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // clears all textfields and textareas
+        
+        clear();
+        
     }//GEN-LAST:event_btnClearActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnCreateCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCategoryActionPerformed
         // opens CreateCategoryGUI 
-        new CreateCategoryGUI(myDriver).setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+        new CreateCategoryGUI2(this,true,myDriver).setVisible(true);
+        showCategories();
+    }//GEN-LAST:event_btnCreateCategoryActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        myDriver.loadFromExcel("C:\\Users\\Scar\\Documents\\NOVA\\2013 Fall\\CSC 202\\Assignment 2 Restaurant Vendor\\fooddata.xls");
+        showCategories();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void listCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listCategoryActionPerformed
+     
+    }//GEN-LAST:event_listCategoryActionPerformed
+
+    /** getSelectedCategoryName() returns the name of selected category within list box
+     * 
+     * @return 
+     */
+    public String getSelectedCategoryName()
+    {
+        int numSelected = listCategory.getSelectedIndexes().length;
+        if(numSelected > 1 || numSelected < 1)
+            return null;
+        else
+        {
+            return listCategory.getSelectedItem(); //getting name of selected category
+            
+        }
+    }
+    
+    
+    /** getSelectedFoodName() returns the name of selected food item within list box
+     * 
+     * @return 
+     */
+    public String getSelectedFoodName()
+    {
+        int numSelected = listFoodItems.getSelectedIndexes().length;
+        if(numSelected > 1 || numSelected < 1)
+            return null;
+        else
+        {
+            return listFoodItems.getSelectedItem(); //getting name of selected category
+            
+        }
+    }
+  
+    
+    private void listCategoryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listCategoryItemStateChanged
+        //to display food items in a category if selected in list box
+        
+        int numSelected = listCategory.getSelectedIndexes().length;
+        if(numSelected > 1 || numSelected < 1)
+            listFoodItems.removeAll(); //if multiple categories are selected, empty listbox of food items
+        else
+        {
+            String findCategory = listCategory.getSelectedItem(); //getting name of selected category
+            CategoryClass tempCategory = myDriver.mCategories.find(findCategory);
+            
+            if(tempCategory!=null)
+            {
+                showFoodItems(tempCategory); //if category name matches, display food items
+            }
+            
+            else
+            {
+                listFoodItems.removeAll();
+            }
+        }
+    }//GEN-LAST:event_listCategoryItemStateChanged
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+
+        // get currently selected category name
+        String selectedCategoryName = getSelectedCategoryName();
+  
+        if(selectedCategoryName==null)
+        {
+            JOptionPane.showMessageDialog(this, "Selected category is invalid");
+            return;
+        }
+     
+        // create a new FoodItemClass object from user input textfields
+        FoodItemClass userInputFoodItem = new FoodItemClass();
+        userInputFoodItem.mFoodName = txtName.getText();
+        userInputFoodItem.mFoodPrice = new BigDecimal(Double.parseDouble(txtPrice.getText()));
+        userInputFoodItem.mFoodQty = Integer.parseInt(txtQty.getText());
+        userInputFoodItem.mFoodDescription = txtDescription.getText();
+        userInputFoodItem.mFoodSize = txtSize.getText();
+        
+        
+        //validate input
+        if(userInputFoodItem.mFoodName==null || userInputFoodItem.mFoodName.equals(""))
+        {
+            JOptionPane.showMessageDialog(this, "Invalid food name - it's empty");
+            return;
+        }
+        // attempt to create a new one or update(save) existing food item
+        try
+        {
+            if(myDriver.createOrSave(userInputFoodItem, selectedCategoryName))
+                showFoodItems(myDriver.mCategories.find(selectedCategoryName));
+            else
+                JOptionPane.showMessageDialog(this, "Updated existing food item : " + userInputFoodItem.mFoodName);
+         
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "Failed to create or save food item" + e.toString());
+            return;
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnDeleteCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCategoryActionPerformed
+        // get selected category
+        String selectedCategory = getSelectedCategoryName();
+        
+        //if no category is selected
+        if(selectedCategory==null)
+        {
+            JOptionPane.showMessageDialog(this,"No category selected");
+            return;
+        }
+        // if(can delete)
+        if(myDriver.deleteCategory(selectedCategory))
+        { //refresh list box of categories
+            showCategories();
+        }
+        else
+        {//error dialog
+            JOptionPane.showMessageDialog(this,"Category : " + selectedCategory + " cannot be deleted" + myDriver.mLastError);
+        }
+         
+    }//GEN-LAST:event_btnDeleteCategoryActionPerformed
+
+    private void btnDisplayFoodInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayFoodInfoActionPerformed
+        
+            String findCategory = listCategory.getSelectedItem(); //getting name of selected category
+            CategoryClass tempCategory = myDriver.mCategories.find(findCategory);
+            
+            if(tempCategory!=null)
+            {
+                String findFood= listFoodItems.getSelectedItem(); //getting name of selected category
+                FoodItemClass tempFood = tempCategory.mFoodItems.find(findFood);
+                
+                if(tempFood!=null)//if not null, call display method
+                {
+                    showFoodInfo(tempFood);
+                }
+                else
+                {
+                     clear(); //does the same thing as CLEAR button
+                } 
+            }
+            else
+            {
+                clear(); //does the same thing as CLEAR button   
+            }
+            
+        
+    }//GEN-LAST:event_btnDisplayFoodInfoActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnCreateCategory;
+    private javax.swing.JButton btnDeleteCategory;
+    private javax.swing.JButton btnDeleteFoodItem;
+    private javax.swing.JButton btnDisplayFoodInfo;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

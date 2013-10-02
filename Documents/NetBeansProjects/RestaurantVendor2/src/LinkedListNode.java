@@ -1,3 +1,8 @@
+/**
+ * LinkedListNode generics
+ * 
+ * @param <T> 
+ */
 
 public class LinkedListNode <T>
 {

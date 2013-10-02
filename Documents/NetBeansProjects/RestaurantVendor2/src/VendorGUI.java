@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author Scar
+ * VendorGUI starts when Driver is run.
+ * It connects user to SearchGUI, which handles categories and food items
+ * 
  */
 public class VendorGUI extends javax.swing.JFrame {
     
@@ -16,9 +12,6 @@ public class VendorGUI extends javax.swing.JFrame {
         myDriver = driver1;
     }
 
-    /**
-     * Creates new form VendorGUI
-     */
     public VendorGUI() {
         initComponents();
     }
@@ -38,19 +31,25 @@ public class VendorGUI extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         menuitemSearch = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        menuitemClear = new javax.swing.JMenuItem();
         menuitemExit = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 102, 102));
+        setBounds(new java.awt.Rectangle(1, 1, 1, 1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Scar\\Documents\\NOVA\\2013 Fall\\CSC 202\\Assignment 2 Restaurant Vendor\\background.jpg")); // NOI18N
-        jLabel1.setText(" ");
+        jLabel1.setLabelFor(this);
+        jLabel1.setToolTipText("");
+        jLabel1.setName(""); // NOI18N
+
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 153));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 102, 102)));
 
         jMenu1.setText("Menu");
 
-        menuitemSearch.setText("Search");
+        menuitemSearch.setText("Food Search");
         menuitemSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuitemSearchActionPerformed(evt);
@@ -60,11 +59,8 @@ public class VendorGUI extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Clear/Exit");
+        jMenu2.setText("Exit");
         jMenu2.setToolTipText("");
-
-        menuitemClear.setText("Clear");
-        jMenu2.add(menuitemClear);
 
         menuitemExit.setText("Exit");
         menuitemExit.addActionListener(new java.awt.event.ActionListener() {
@@ -82,11 +78,15 @@ public class VendorGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 87, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -109,7 +109,6 @@ public class VendorGUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem menuitemClear;
     private javax.swing.JMenuItem menuitemExit;
     private javax.swing.JMenuItem menuitemSearch;
     // End of variables declaration//GEN-END:variables
