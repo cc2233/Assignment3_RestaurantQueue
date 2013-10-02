@@ -1,3 +1,5 @@
+package restaurantvendor2;
+
 /**
  * CategoryClass to create category objects
  * 

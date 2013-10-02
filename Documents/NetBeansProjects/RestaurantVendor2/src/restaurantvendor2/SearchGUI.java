@@ -1,3 +1,5 @@
+package restaurantvendor2;
+
 import javax.swing.*;
 import java.math.*;
 
@@ -57,6 +59,7 @@ public class SearchGUI extends javax.swing.JFrame {
         btnDeleteFoodItem = new javax.swing.JButton();
         btnCreateCategory = new javax.swing.JButton();
         btnDeleteCategory = new javax.swing.JButton();
+        btnSavetobinary = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
@@ -188,6 +191,14 @@ public class SearchGUI extends javax.swing.JFrame {
             }
         });
 
+        btnSavetobinary.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSavetobinary.setText("SAVE TO BINARY");
+        btnSavetobinary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSavetobinaryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -206,7 +217,8 @@ public class SearchGUI extends javax.swing.JFrame {
                     .addComponent(listFoodItems, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                     .addComponent(btnDisplayFoodInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDeleteFoodItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDeleteFoodItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSavetobinary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
@@ -285,7 +297,7 @@ public class SearchGUI extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDeleteCategory)
                     .addComponent(btnDeleteFoodItem))
@@ -293,8 +305,9 @@ public class SearchGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClear)
                     .addComponent(btnSave)
-                    .addComponent(btnClose))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(btnClose)
+                    .addComponent(btnSavetobinary))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -355,8 +368,9 @@ public class SearchGUI extends javax.swing.JFrame {
   
     
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        // closes
-        this.setVisible(false);
+        // closes depending on user choice
+       
+        new SaveWarning(null, true).setVisible(true);
     }//GEN-LAST:event_btnCloseActionPerformed
 
     /** clear() clears all text fields that contain food info
@@ -543,6 +557,10 @@ public class SearchGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDisplayFoodInfoActionPerformed
 
+    private void btnSavetobinaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavetobinaryActionPerformed
+        myDriver.saveToBinary("C:\\Users\\Scar\\Documents\\NOVA\\2013 Fall\\CSC 202\\Assignment 2 Restaurant Vendor\\fooddatasaved.txt");
+    }//GEN-LAST:event_btnSavetobinaryActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
@@ -552,6 +570,7 @@ public class SearchGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteFoodItem;
     private javax.swing.JButton btnDisplayFoodInfo;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSavetobinary;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

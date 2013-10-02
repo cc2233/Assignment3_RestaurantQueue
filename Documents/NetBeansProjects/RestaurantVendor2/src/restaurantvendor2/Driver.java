@@ -1,3 +1,5 @@
+package restaurantvendor2;
+
 import java.io.*;
 import java.nio.*;
 import java.util.*;
@@ -47,11 +49,76 @@ public class Driver
      * loadFromExcel(String excelFileName) loads food data from an excel file
      * @param excelFileName 
      */
-    public void loadFromBinary(String binaryFileName)
+    
+    
+    
+    public void saveToBinary(String binaryFileName)
     {
-        
+        try 
+        {
+            // Put some bytes in a buffer so we can write
+            String bytes = "EMPTY";
+            byte[] buffer = bytes.getBytes();
+
+            FileOutputStream outputStream = new FileOutputStream(binaryFileName);
+           
+            // write() writes as many bytes from the buffer as the length of the buffer.
+            outputStream.write(buffer);
+
+            //close files.
+            outputStream.close();		
+
+            System.out.println("Saved " + buffer.length + " bytes");
+        }
+        catch(FileNotFoundException ex) 
+        {
+            System.out.println("Unable to open file '" + binaryFileName + "'");
+  			
+        }
+        catch(IOException ex) 
+        {
+            System.out.println("Error writing file : " + binaryFileName);
+        }
     }
     
+
+
+    public void loadFromBinary(String binaryFileName)
+    {
+        try {
+            // Use this for reading the data.
+            byte[] buffer = new byte[1000];
+
+            FileInputStream inputStream = new FileInputStream(binaryFileName);
+      
+            // read fills buffer with data and returns
+            // the number of bytes read 
+            
+            int total = 0;
+            int nRead = 0;
+            while((nRead = inputStream.read(buffer)) != -1) 
+            {
+                // Convert to String so we can display it.
+                System.out.println(new String(buffer));
+                total += nRead;
+            }	
+
+            //close file
+            inputStream.close();		
+
+            System.out.println("Read " + total + " bytes");
+        }
+        catch(FileNotFoundException ex) 
+        {
+            System.out.println("Unable to open file '" +   binaryFileName + "'");
+  			
+        }
+        catch(IOException ex) 
+        {
+            System.out.println("Error reading file :"+ binaryFileName);
+        }
+    }
+
     
     public void loadFromExcel(String excelFileName)
     {
@@ -195,6 +262,7 @@ public class Driver
 
     }
     
+
     
     /**
      * findOrAddCategory(String newCategoryName) takes in a category name to locate it if it exists, or add new if it doesn't

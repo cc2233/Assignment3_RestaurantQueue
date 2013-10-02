@@ -1,3 +1,5 @@
+package restaurantvendor2;
+
 /**
  * VendorGUI starts when Driver is run.
  * It connects user to SearchGUI, which handles categories and food items

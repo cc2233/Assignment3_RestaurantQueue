@@ -1,3 +1,5 @@
+package restaurantvendor2;
+
 /**
  * CreateCategoryGUI@ is a JDialog(modal) the user uses to create new categories. 
  * If there is an existing category with the same name, it won't be created

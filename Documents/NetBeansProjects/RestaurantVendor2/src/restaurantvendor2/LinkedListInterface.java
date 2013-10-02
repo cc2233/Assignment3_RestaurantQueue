@@ -1,3 +1,5 @@
+package restaurantvendor2;
+
 /**
  * LinkedListInterface 
 
